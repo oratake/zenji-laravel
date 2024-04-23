@@ -4,6 +4,11 @@ Zenji
 
 ## 環境構築
 
+.env.exampleが開発用の.envの例になるので、これをcopyしておく
+```
+$ cp .env.example .env
+```
+
 [Composer依存関係のインストール](https://readouble.com/laravel/11.x/ja/sail.html#installing-composer-dependencies-for-existing-projects)
 ↑ `docker run --rm \ ...` とある部分を全て実行。
 Dockerインストール済であれば実行可能。PHPのインストールは不要。
