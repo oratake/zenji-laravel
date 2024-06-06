@@ -5,8 +5,12 @@
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-            セキュリティ確保のため、長くランダムなパスワードを推奨します。
+            セキュリティ確保のため、複雑なパスワードを推奨します。
         </p>
+        <p class="mt-1 text-sm text-gray-600">
+            安全なパスワードを作る方法はこちらを参考にしてください。
+        </p>
+        <a href="https://www.ipa.go.jp/security/chocotto/" class="mt-1 text-sm text-gray-600 underline">独立行政法人 情報処理推進機構（IPA）</a>
     </header>
 
     <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
