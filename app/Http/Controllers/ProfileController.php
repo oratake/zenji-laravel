@@ -31,10 +31,6 @@ class ProfileController extends Controller
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
-        
-        if ($request->user()->jiin_name === null) {
-            $request->user()->jiin_name = '';
-        }
 
         $request->user()->save();
 
