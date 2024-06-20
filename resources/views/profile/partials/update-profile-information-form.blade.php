@@ -47,6 +47,12 @@
             @endif
         </div>
 
+        <div>
+        <x-input-label for="jiin_name" value="寺院名" />
+            <x-text-input id="jiin_name" name="jiin_name" type="text" class="mt-1 block w-full" :value="old('jiin_name', $user->jiin_name)" />
+            <x-input-error class="mt-2" :messages="$errors->get('jiin_name')" />
+        </div>
+
         <div class="flex items-center gap-4">
             <x-primary-button>更新</x-primary-button>
 
