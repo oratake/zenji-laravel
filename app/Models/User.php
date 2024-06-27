@@ -11,6 +11,12 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    //Dankaモデルとのリレーション
+    public function dankas(): HasMany
+    {
+        return $this->hasMany(Danka::class, 'bouzu_id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
