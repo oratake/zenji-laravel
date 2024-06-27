@@ -38,6 +38,14 @@
                             プロフィール
                         </x-dropdown-link>
 
+                        <x-dropdown-link :href="route('dankas.index')">
+                            檀家一覧
+                        </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('dankas.register')">
+                            檀家登録
+                        </x-dropdown-link>
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
