@@ -22,7 +22,7 @@
                             <th>{{ $danka->family_head_last_name}}{{$danka->family_head_first_name }}</th>
                             <th>{{ $danka->email }}</th>
                             <th>{{ $danka->phone_number }}</th>
-                            <th>{{$danka->postcode}}{{$danka->address}}</th>
+                            <th>{{ $danka->postcode }}{{ $danka->address }}</th>
                             <th>{{ $danka->note }}</th>
                         </tr>
                         @endforeach

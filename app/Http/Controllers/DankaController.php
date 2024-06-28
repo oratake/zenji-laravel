@@ -15,7 +15,8 @@ class DankaController extends Controller
     //檀家一覧
     public function index()
     {
-        $dankas = Danka::all()->sortByDesc('created_at');
+        $bouzu_id = Auth::id();
+        $dankas = Danka::where('bouzu_id', $bouzu_id)->get()->sortByDesc('created_at');
         return view('dankas.index', ['dankas' => $dankas]);
     }
 
