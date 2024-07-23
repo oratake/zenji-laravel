@@ -44,12 +44,6 @@ class DankaController extends Controller
         //ここで、emailとphone_numberが両方nullになっていないか確認する。
         //両方nullの場合は、どちらかは入れてもらうようメッセージを出す
 
-        if (Auth::check()) {
-            $bouzu_id = Auth::id();
-        } else {
-            return redirect()->route('login')->withErrors(['login' => '登録するにはログインが必要です']);
-        }
-
         $danka = Danka::create([
             'family_head_last_name' => $request->family_head_last_name,
             'family_head_first_name' => $request->family_head_first_name,
