@@ -59,4 +59,9 @@ class DankaController extends Controller
 
         return redirect(route('dankas.index', absolute: false));
     }
+
+    public function edit(): View
+    {
+        return view('dankas.edit');
+    }
 }
