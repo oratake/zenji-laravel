@@ -24,6 +24,7 @@
                             <th>{{ $danka->phone_number }}</th>
                             <th>{{ $danka->postcode }}{{ $danka->address }}</th>
                             <th>{{ $danka->note }}</th>
+                            <th><button onclick="location.href='/dankas/edit'">編集</button></th>
                         </tr>
                         @endforeach
                     </table>
