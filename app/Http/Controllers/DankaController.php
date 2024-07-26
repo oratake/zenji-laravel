@@ -60,8 +60,10 @@ class DankaController extends Controller
         return redirect(route('dankas.index', absolute: false));
     }
 
-    public function edit(): View
+    public function edit(Request $request): View
     {
-        return view('dankas.edit');
+        $danka_id = $request->danka_id;
+        $danka = Danka::find($danka_id);
+        return view('dankas.edit', ['danka' => $danka]);
     }
 }
