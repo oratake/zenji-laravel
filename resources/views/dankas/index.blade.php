@@ -19,12 +19,18 @@
                         </tr>
                         @foreach ($dankas as $danka)
                         <tr>
-                            <th>{{ $danka->family_head_last_name}}{{$danka->family_head_first_name }}</th>
+                            <th>{{ $danka->family_head_last_name }}{{ $danka->family_head_first_name }}</th>
                             <th>{{ $danka->email }}</th>
                             <th>{{ $danka->phone_number }}</th>
                             <th>{{ $danka->postcode }}{{ $danka->address }}</th>
                             <th>{{ $danka->note }}</th>
-                            <th><button onclick="location.href='/dankas/edit'">編集</button></th>
+                            <th>
+                                <form action="{{ route('dankas.edit') }}">
+                                    @csrf
+                                    <input type="hidden" id="danka_id" name="danka_id" value="{{ $danka->id }}">
+                                    <input type="submit" value="編集">
+                                </form>
+                            </th>
                         </tr>
                         @endforeach
                     </table>
