@@ -19,8 +19,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/dankas/index', [DankaController::class, 'index'])->name('dankas.index');
     Route::get('/dankas/register', [DankaController::class, 'create'])->name('dankas.register');
     Route::post('/dankas/register', [DankaController::class, 'store']);
-    Route::get('/dankas/edit', [DankaController::class, 'edit'])->name('dankas.edit');
-    Route::post('/dankas/edit', [DankaController::class, 'update'])->name('dankas.update');
+    Route::post('/dankas/edit', [DankaController::class, 'edit'])->name('dankas.edit');
+    #Route::post('/dankas/edit', [DankaController::class, 'update'])->name('dankas.update');
 });
 
 require __DIR__.'/auth.php';
