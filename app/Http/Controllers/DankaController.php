@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Danka;
 use App\Models\User;
+use App\Http\Requests\DankaUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -58,5 +59,22 @@ class DankaController extends Controller
         ]);
 
         return redirect(route('dankas.index', absolute: false));
+    }
+
+    public function edit(Request $request): View
+    {
+        $danka_id = $request->danka_id;
+        $danka = Danka::find($danka_id);
+        return view('dankas.edit', ['danka' => $danka]);
+    }
+
+    public function update(DankaUpdateRequest $request): View
+    {
+        $danka_id = $request->id;
+        $danka = Danka::find($danka_id);
+        $danka->fill($request->validated());
+        $danka->save();
+
+        return view('welcome');
     }
 }
