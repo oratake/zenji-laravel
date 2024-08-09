@@ -23,12 +23,13 @@ class DankaUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        $dankaId = $this->route('id');
         return [
             'family_head_last_name' => ['required', 'string', 'max:255'],
             'family_head_first_name' => ['required', 'string', 'max:255'],
             'family_head_last_name_kana' => ['required', 'string', 'max:255'],
             'family_head_first_name_kana' => ['required', 'string', 'max:255'],
-            'email' => ['nullable', 'confirmed', 'string', 'lowercase', 'email', 'max:255', 'unique:'.Danka::class],
+            'email' => ['nullable', 'confirmed', 'string', 'lowercase', 'email', 'max:255', Rule::unique(Danka::class)->ignore($dankaId)],
             'postcode' => ['nullable', 'string', 'max:255'],
             'address' => ['nullable', 'string', 'max:255'],
             'phone_number' => ['nullable', 'string', 'max:255'],
