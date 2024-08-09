@@ -25,11 +25,7 @@
                             <th>{{ $danka->postcode }}{{ $danka->address }}</th>
                             <th>{{ $danka->note }}</th>
                             <th>
-                                <form action="{{ route('dankas.edit') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" id="danka_id" name="danka_id" value="{{ $danka->id }}">
-                                    <input type="submit" value="編集">
-                                </form>
+                                <a href="{{ route('dankas.edit', ['id' => $danka->id]) }}">編集</a>
                             </th>
                         </tr>
                         @endforeach
