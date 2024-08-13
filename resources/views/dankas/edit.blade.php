@@ -106,6 +106,50 @@
                 </x-primary-button>
             </div>
         </form>
+        <x-danger-button
+        x-data=""
+        x-on:click.prevent="$dispatch('open-modal', 'confirm-danka-deletion')"
+        >削除</x-danger-button>
+
+        <x-modal name="confirm-danka-deletion" :show="$errors->dankaDeletion->isNotEmpty()" focusable>
+            <form method="post" action="{{ route('dankas.destroy') }}" class="p-6">
+                @csrf
+                @method('delete')
+
+                <h2 class="text-lg font-medium text-gray-900">
+                    この檀家情報を削除しますか？
+                </h2>
+
+                <p class="mt-1 text-sm text-gray-600">
+                    一度削除を実行すると、この檀家情報は完全に削除されます。よろしければ、パスワードを入力してください。
+                </p>
+
+                <div class="mt-6">
+                    <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
+
+                    <x-text-input
+                        id="password"
+                        name="password"
+                        type="password"
+                        class="mt-1 block w-3/4"
+                        placeholder="パスワード"
+                    />
+                    <input type="hidden" id="id" name="id" value="{{ $danka->id }}">
+
+                    <x-input-error :messages="$errors->dankaDeletion->get('password')" class="mt-2" />
+                </div>
+
+                <div class="mt-6 flex justify-end">
+                    <x-secondary-button x-on:click="$dispatch('close')">
+                        キャンセル
+                    </x-secondary-button>
+
+                    <x-danger-button class="ms-3">
+                        檀家情報を削除する
+                    </x-danger-button>
+                </div>
+            </form>
+        </x-modal>
 
     </section>
 </x-guest-layout>
