@@ -82,4 +82,17 @@ class DankaController extends Controller
 
         return Redirect::route('dankas.edit', ['id' => $danka_id])->with('status', 'danka-updated');
     }
+
+    public function destroy(Request $request): RedirectResponse
+    {
+        $request->validateWithBag('dankaDeletion', [
+            'password' => ['required', 'current_password'],
+        ]);
+
+        $id = $request->id;
+        $danka = Danka::find($id);
+        $danka->delete();
+
+        return Redirect::to(route('dankas.index'));
+    }
 }
