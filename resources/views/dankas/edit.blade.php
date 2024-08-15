@@ -22,6 +22,7 @@
         
         <form action="{{ route('dankas.update', ['id' => $danka->id]) }}" method="post" class="mt-6 space-y-6" >
             @csrf
+            @method('patch')
 
             <!-- danka_id -->
             <input type="hidden" id="id" name="id" value="{{ $danka->id }}">
