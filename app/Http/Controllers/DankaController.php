@@ -29,6 +29,7 @@ class DankaController extends Controller
     //檀家登録
     public function store(Request $request): RedirectResponse
     {
+
         $request->validate([
             'family_head_last_name' => ['required', 'string', 'max:255'],
             'family_head_first_name' => ['required', 'string', 'max:255'],
@@ -40,6 +41,8 @@ class DankaController extends Controller
             'phone_number' => ['nullable', 'string', 'max:255'],
             'note' => ['nullable', 'string'],
         ]);
+
+        $bouzu_id = Auth::id();
 
         //ここで、emailとphone_numberが両方nullになっていないか確認する。
         //両方nullの場合は、どちらかは入れてもらうようメッセージを出す
