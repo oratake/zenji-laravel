@@ -74,13 +74,17 @@ class DankaController extends Controller
     public function update(DankaUpdateRequest $request): RedirectResponse
     {
 
-        $danka_id = $request->id;
-        $danka = Danka::find($danka_id);
-        $danka->fill($request->validated());
-        //TODO: ここで、emailとphone_numberどっちかはあるように確認
-        $danka->save();
-
-        return Redirect::route('dankas.edit', ['id' => $danka_id])->with('status', 'danka-updated');
+        $dankaId = $request->id;
+        $danka = Danka::find($dankaId);
+        $bouzuId = $danka->bouzu_id;
+        if (!Danka::isLoginBouzu($bouzuId)) {
+            return Redirect::route('welcome')->with('status', 'erroUnauthorized');
+        } else {
+            $danka->fill($request->validated());
+            //TODO: ここで、emailとphone_numberどっちかはあるように確認
+            $danka->save();
+            return Redirect::route('dankas.edit', ['id' => $dankaId])->with('status', 'danka-updated');
+        }
     }
 
     public function destroy(Request $request): RedirectResponse
