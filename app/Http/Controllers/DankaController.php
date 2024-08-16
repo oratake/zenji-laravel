@@ -68,7 +68,12 @@ class DankaController extends Controller
     public function edit($id): View
     {
         $danka = Danka::find($id);
-        return view('dankas.edit', ['danka' => $danka]);
+        $bouzuId = $danka->bouzu_id;
+        if (!Danka::isLoginBouzu($bouzuId)) {
+            return view('welcome')->with('status', 'erroUnauthorized');
+        } else {
+            return view('dankas.edit', ['danka' => $danka]);
+        }
     }
 
     public function update(DankaUpdateRequest $request): RedirectResponse
@@ -95,8 +100,12 @@ class DankaController extends Controller
 
         $id = $request->id;
         $danka = Danka::find($id);
-        $danka->delete();
-
-        return Redirect::to(route('dankas.index'));
+        $bouzuId = $danka->bouzu_id;
+        if (!Danka::isLoginBouzu($bouzuId)) {
+            return Redirect::route('welcome')->with('status', 'erroUnauthorized');
+        } else {
+            $danka->delete();
+            return Redirect::to(route('dankas.index'));
+        }
     }
 }
