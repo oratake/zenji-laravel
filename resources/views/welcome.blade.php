@@ -55,6 +55,15 @@
                     </header>
 
                     <main class="mt-6">
+                    @if (session('status') === 'erroUnauthorized')
+                        <p
+                        x-data="{ show: true }"
+                        x-show="show"
+                        x-transition
+                        x-init="setTimeout(() => show = false, 2000)"
+                        class="text-sm text-gray-600"
+                        >error: 許可されていない挙動です</p>
+                    @endif
                         <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
                             <a
                                 href="https://laravel.com/docs"
