@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 
 class Danka extends Model
 {
@@ -13,6 +14,16 @@ class Danka extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'bouzu_id');
+    }
+
+    public static function isLoginBouzu($bouzu_id) : bool
+    {
+        $loginId = Auth::id(); 
+        if ($bouzu_id === $loginId) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
