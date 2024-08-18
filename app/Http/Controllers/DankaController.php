@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Danka;
 use App\Models\User;
+use App\Http\Requests\DankaUpdateRequest;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules;
@@ -17,6 +19,7 @@ class DankaController extends Controller
     {
         $bouzu_id = Auth::id();
         $dankas = Danka::where('bouzu_id', $bouzu_id)->get()->sortByDesc('created_at');
+
         return view('dankas.index', ['dankas' => $dankas]);
     }
 
@@ -41,7 +44,7 @@ class DankaController extends Controller
             'note' => ['nullable', 'string'],
         ]);
 
-        //ここで、emailとphone_numberが両方nullになっていないか確認する。
+        //TODO: ここで、emailとphone_numberが両方nullになっていないか確認する。
         //両方nullの場合は、どちらかは入れてもらうようメッセージを出す
 
         $danka = Danka::create([
@@ -58,5 +61,36 @@ class DankaController extends Controller
         ]);
 
         return redirect(route('dankas.index', absolute: false));
+    }
+
+    public function edit($id): View
+    {
+        $danka = Danka::find($id);
+        return view('dankas.edit', ['danka' => $danka]);
+    }
+
+    public function update(DankaUpdateRequest $request): RedirectResponse
+    {
+
+        $danka_id = $request->id;
+        $danka = Danka::find($danka_id);
+        $danka->fill($request->validated());
+        //TODO: ここで、emailとphone_numberどっちかはあるように確認
+        $danka->save();
+
+        return Redirect::route('dankas.edit', ['id' => $danka_id])->with('status', 'danka-updated');
+    }
+
+    public function destroy(Request $request): RedirectResponse
+    {
+        $request->validateWithBag('dankaDeletion', [
+            'password' => ['required', 'current_password'],
+        ]);
+
+        $id = $request->id;
+        $danka = Danka::find($id);
+        $danka->delete();
+
+        return Redirect::to(route('dankas.index'));
     }
 }
