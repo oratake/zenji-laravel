@@ -65,12 +65,12 @@ class DankaController extends Controller
         return redirect(route('dankas.index', absolute: false));
     }
 
-    public function edit($id): View
+    public function edit($id): View | RedirectResponse
     {
         $danka = Danka::find($id);
         $bouzuId = $danka->bouzu_id;
         if (!Danka::isLoginBouzu($bouzuId)) {
-            return view('welcome')->with('status', 'erroUnauthorized');
+            return Redirect::route('welcome')->with('status', 'errorUnauthorized');
         } else {
             return view('dankas.edit', ['danka' => $danka]);
         }
@@ -83,7 +83,7 @@ class DankaController extends Controller
         $danka = Danka::find($dankaId);
         $bouzuId = $danka->bouzu_id;
         if (!Danka::isLoginBouzu($bouzuId)) {
-            return Redirect::route('welcome')->with('status', 'erroUnauthorized');
+            return Redirect::route('welcome')->with('status', 'errorUnauthorized');
         } else {
             $danka->fill($request->validated());
             //TODO: ここで、emailとphone_numberどっちかはあるように確認
@@ -102,7 +102,7 @@ class DankaController extends Controller
         $danka = Danka::find($id);
         $bouzuId = $danka->bouzu_id;
         if (!Danka::isLoginBouzu($bouzuId)) {
-            return Redirect::route('welcome')->with('status', 'erroUnauthorized');
+            return Redirect::route('welcome')->with('status', 'errorUnauthorized');
         } else {
             $danka->delete();
             return Redirect::to(route('dankas.index'));

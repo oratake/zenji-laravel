@@ -55,7 +55,7 @@
                     </header>
 
                     <main class="mt-6">
-                    @if (session('status') === 'erroUnauthorized')
+                    @if (session('status') === 'errorUnauthorized')
                         <p
                         x-data="{ show: true }"
                         x-show="show"
