@@ -20,8 +20,6 @@ class DankaController extends Controller
         $bouzu_id = Auth::id();
         $dankas = Danka::where('bouzu_id', $bouzu_id)->get()->sortByDesc('created_at');
 
-        // $dankasの中身をxdebugで見る用
-        // $debugModel = $dankas->toArray();
         return view('dankas.index', ['dankas' => $dankas]);
     }
 
