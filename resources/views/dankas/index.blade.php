@@ -19,11 +19,14 @@
                         </tr>
                         @foreach ($dankas as $danka)
                         <tr>
-                            <th>{{ $danka->family_head_last_name}}{{$danka->family_head_first_name }}</th>
+                            <th>{{ $danka->family_head_last_name }}{{ $danka->family_head_first_name }}</th>
                             <th>{{ $danka->email }}</th>
                             <th>{{ $danka->phone_number }}</th>
                             <th>{{ $danka->postcode }}{{ $danka->address }}</th>
                             <th>{{ $danka->note }}</th>
+                            <th>
+                                <a href="{{ route('dankas.edit', ['id' => $danka->id]) }}">編集</a>
+                            </th>
                         </tr>
                         @endforeach
                     </table>
