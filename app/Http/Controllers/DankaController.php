@@ -68,9 +68,9 @@ class DankaController extends Controller
     public function edit($id): View | RedirectResponse
     {
         $danka = Danka::find($id);
-        $bouzuId = $danka->bouzu_id;
-        if (!Danka::isLoginBouzu($bouzuId)) {
-            return Redirect::route('welcome')->with('status', 'errorUnauthorized');
+        $bouzu_id = $danka->bouzu_id;
+        if (!Danka::isLoginBouzu($bouzu_id)) {
+            return Redirect::route('welcome')->with('status', 'error-unauthorized');
         } else {
             return view('dankas.edit', ['danka' => $danka]);
         }
@@ -79,16 +79,16 @@ class DankaController extends Controller
     public function update(DankaUpdateRequest $request): RedirectResponse
     {
 
-        $dankaId = $request->id;
-        $danka = Danka::find($dankaId);
-        $bouzuId = $danka->bouzu_id;
-        if (!Danka::isLoginBouzu($bouzuId)) {
-            return Redirect::route('welcome')->with('status', 'errorUnauthorized');
+        $danka_id = $request->id;
+        $danka = Danka::find($danka_id);
+        $bouzu_id = $danka->bouzu_id;
+        if (!Danka::isLoginBouzu($bouzu_id)) {
+            return Redirect::route('welcome')->with('status', 'error-unauthorized');
         } else {
             $danka->fill($request->validated());
             //TODO: ここで、emailとphone_numberどっちかはあるように確認
             $danka->save();
-            return Redirect::route('dankas.edit', ['id' => $dankaId])->with('status', 'danka-updated');
+            return Redirect::route('dankas.edit', ['id' => $danka_id])->with('status', 'danka-updated');
         }
     }
 
@@ -100,9 +100,9 @@ class DankaController extends Controller
 
         $id = $request->id;
         $danka = Danka::find($id);
-        $bouzuId = $danka->bouzu_id;
-        if (!Danka::isLoginBouzu($bouzuId)) {
-            return Redirect::route('welcome')->with('status', 'errorUnauthorized');
+        $bouzu_id = $danka->bouzu_id;
+        if (!Danka::isLoginBouzu($bouzu_id)) {
+            return Redirect::route('welcome')->with('status', 'error-unauthorized');
         } else {
             $danka->delete();
             return Redirect::to(route('dankas.index'));
