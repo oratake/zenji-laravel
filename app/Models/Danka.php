@@ -18,12 +18,7 @@ class Danka extends Model
 
     public static function isLoginBouzu($bouzu_id) : bool
     {
-        $login_id = Auth::id(); 
-        if ($bouzu_id === $login_id) {
-            return true;
-        } else {
-            return false;
-        }
+        return $bouzu_id === Auth::id();
     }
 
     /**
