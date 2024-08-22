@@ -71,9 +71,8 @@ class DankaController extends Controller
         $bouzu_id = $danka->bouzu_id;
         if (!Danka::isLoginBouzu($bouzu_id)) {
             return Redirect::route('welcome')->with('status', 'error-unauthorized');
-        } else {
-            return view('dankas.edit', ['danka' => $danka]);
         }
+            return view('dankas.edit', ['danka' => $danka]);
     }
 
     public function update(DankaUpdateRequest $request): RedirectResponse
@@ -84,12 +83,12 @@ class DankaController extends Controller
         $bouzu_id = $danka->bouzu_id;
         if (!Danka::isLoginBouzu($bouzu_id)) {
             return Redirect::route('welcome')->with('status', 'error-unauthorized');
-        } else {
-            $danka->fill($request->validated());
-            //TODO: ここで、emailとphone_numberどっちかはあるように確認
-            $danka->save();
-            return Redirect::route('dankas.edit', ['id' => $danka_id])->with('status', 'danka-updated');
         }
+        $danka->fill($request->validated());
+        //TODO: ここで、emailとphone_numberどっちかはあるように確認
+        $danka->save();
+        return Redirect::route('dankas.edit', ['id' => $danka_id])->with('status', 'danka-updated');
+        
     }
 
     public function destroy(Request $request): RedirectResponse
@@ -103,9 +102,8 @@ class DankaController extends Controller
         $bouzu_id = $danka->bouzu_id;
         if (!Danka::isLoginBouzu($bouzu_id)) {
             return Redirect::route('welcome')->with('status', 'error-unauthorized');
-        } else {
-            $danka->delete();
-            return Redirect::to(route('dankas.index'));
         }
+        $danka->delete();
+        return Redirect::to(route('dankas.index'));
     }
 }
