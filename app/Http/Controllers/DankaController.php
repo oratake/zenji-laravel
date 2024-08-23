@@ -45,8 +45,6 @@ class DankaController extends Controller
             'note' => ['nullable', 'string'],
         ]);
 
-        //TODO: ここで、emailとphone_numberが両方nullになっていないか確認する。
-        //両方nullの場合は、どちらかは入れてもらうようメッセージを出す
         if (Danka::hasNoContactInfo($danka_info)) {
             return redirect()->back()->with('status', 'require-email-or-phone-number')->withInput();
         }
@@ -90,7 +88,6 @@ class DankaController extends Controller
             return Redirect::route('welcome')->with('status', 'error-unauthorized');
         }
 
-        //TODO: ここで、emailとphone_numberどっちかはあるように確認
         $danka_info = $request->validated();
         if (Danka::hasNoContactInfo($danka_info)) {
             return redirect()->back()->with('status', 'require-email-or-phone-number')->withInput();
