@@ -1,4 +1,14 @@
 <x-guest-layout>
+
+    @if (session('status') === 'require-email-or-phone-number')
+        <p
+        x-data="{ show: true }"
+        x-show="show"
+        x-transition
+        x-init="setTimeout(() => show = false, 2000)"
+        class="text-sm text-gray-600"
+        >メールアドレスか電話番号のどちらかは入力してください</p>
+    @endif
     <form method="POST" action="{{ route('dankas.register') }}">
         @csrf
 

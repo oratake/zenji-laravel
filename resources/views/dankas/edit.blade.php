@@ -11,13 +11,23 @@
         </header>
 
         @if (session('status') === 'danka-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >更新しました</p>
+            <p
+                x-data="{ show: true }"
+                x-show="show"
+                x-transition
+                x-init="setTimeout(() => show = false, 2000)"
+                class="text-sm text-gray-600"
+            >更新しました</p>
+        @endif
+
+        @if (session('status') === 'require-email-or-phone-number')
+            <p
+                x-data="{ show: true }"
+                x-show="show"
+                x-transition
+                x-init="setTimeout(() => show = false, 2000)"
+                class="text-sm text-gray-600"
+            >メールアドレスか電話番号のどちらかは入力してください</p>
         @endif
         
         <form action="{{ route('dankas.update', ['id' => $danka->id]) }}" method="post" class="mt-6 space-y-6" >
