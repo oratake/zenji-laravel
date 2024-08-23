@@ -84,6 +84,13 @@
                 <x-input-error :messages="$errors->get('email_confirmation')" class="mt-2" />
             </div>
 
+            <!-- phone_number -->
+            <div class="mt-4">
+                <x-input-label for="phone_number" value="電話番号 (市外局番からお入れください)" />
+                <x-text-input id="phone_number" class="block mt-1 w-full" type="tel" name="phone_number" :value="old('phone_number', $danka->phone_number)" />
+                <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
+            </div>  
+
             <!-- postcode -->
             <div class="mt-4">
                 <x-input-label for="postcode" value="郵便番号" />
@@ -96,13 +103,6 @@
                 <x-input-label for="address" value="住所" />
                 <x-text-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address', $danka->address)" />
                 <x-input-error :messages="$errors->get('address')" class="mt-2" />
-            </div>  
-
-            <!-- phone_number -->
-            <div class="mt-4">
-                <x-input-label for="phone_number" value="電話番号 (市外局番からお入れください)" />
-                <x-text-input id="phone_number" class="block mt-1 w-full" type="tel" name="phone_number" :value="old('phone_number', $danka->phone_number)" />
-                <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
             </div>  
             
             <!-- note -->
