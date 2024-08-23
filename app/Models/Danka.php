@@ -21,6 +21,11 @@ class Danka extends Model
         return $bouzu_id === Auth::id();
     }
 
+    public static function hasNoContactInfo($danka_info) : bool
+    {
+        return $danka_info['email'] === null && $danka_info['phone_number'] === null;
+    }
+
     /**
      * The attributes that are mass assignable.
      *
