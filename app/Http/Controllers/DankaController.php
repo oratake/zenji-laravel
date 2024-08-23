@@ -33,7 +33,7 @@ class DankaController extends Controller
     public function store(Request $request): RedirectResponse
     {
 
-        $request->validate([
+        $danka_info = $request->validate([
             'family_head_last_name' => ['required', 'string', 'max:255'],
             'family_head_first_name' => ['required', 'string', 'max:255'],
             'family_head_last_name_kana' => ['required', 'string', 'max:255'],
@@ -45,10 +45,13 @@ class DankaController extends Controller
             'note' => ['nullable', 'string'],
         ]);
 
-        $bouzu_id = Auth::id();
-
         //TODO: ここで、emailとphone_numberが両方nullになっていないか確認する。
         //両方nullの場合は、どちらかは入れてもらうようメッセージを出す
+        if (Danka::hasNoContactInfo($danka_info)) {
+            return redirect()->back()->with('status', 'require-email-or-phone-number')->withInput();
+        }
+
+        $bouzu_id = Auth::id();
 
         $danka = Danka::create([
             'family_head_last_name' => $request->family_head_last_name,
@@ -82,11 +85,18 @@ class DankaController extends Controller
         $danka_id = $request->id;
         $danka = Danka::find($danka_id);
         $bouzu_id = $danka->bouzu_id;
+
         if (!Danka::isLoginBouzu($bouzu_id)) {
             return Redirect::route('welcome')->with('status', 'error-unauthorized');
         }
-        $danka->fill($request->validated());
+
         //TODO: ここで、emailとphone_numberどっちかはあるように確認
+        $danka_info = $request->validated();
+        if (Danka::hasNoContactInfo($danka_info)) {
+            return redirect()->back()->with('status', 'require-email-or-phone-number')->withInput();
+        }
+
+        $danka->fill($danka_info);
         $danka->save();
         return Redirect::route('dankas.edit', ['id' => $danka_id])->with('status', 'danka-updated');
         
