@@ -16,11 +16,24 @@ class Danka extends Model
         return $this->belongsTo(User::class, 'bouzu_id');
     }
 
+
+    /**
+     * ログイン中のユーザーに、対象の檀家の編集・削除の権限があるか確認するメソッド
+     * 
+     * @param int $bouzu_id
+     * @return bool
+     */
     public static function isLoginBouzu($bouzu_id) : bool
     {
         return $bouzu_id === Auth::id();
     }
 
+    /**
+     * メールアドレスと電話番号、両方がnullならtrueを返すメソッド
+     * 
+     * @param array $danka_info
+     * @return bool 
+     */
     public static function hasNoContactInfo($danka_info) : bool
     {
         return $danka_info['email'] === null && $danka_info['phone_number'] === null;
