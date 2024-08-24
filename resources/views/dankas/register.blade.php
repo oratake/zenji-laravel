@@ -5,39 +5,54 @@
         x-data="{ show: true }"
         x-show="show"
         x-transition
-        x-init="setTimeout(() => show = false, 2000)"
-        class="text-sm text-gray-600"
+        class="text-sm text-red-500"
         >メールアドレスか電話番号のどちらかは入力してください</p>
     @endif
     <form method="POST" action="{{ route('dankas.register') }}">
         @csrf
 
         <!-- family_head_last_name -->
-        <div>
-            <x-input-label for="family_head_last_name" value="代表者 姓" />
+        <div class="mt-4">
+            <div class="flex items-center">
+                <x-input-label for="family_head_last_name" value="代表者 姓" />
+                <span class="text-red-500 text-sm ml-1">　　必須</span>
+            </div>
             <x-text-input id="family_head_last_name" class="block mt-1 w-full" type="text" name="family_head_last_name" :value="old('family_head_last_name')" required autofocus />
             <x-input-error :messages="$errors->get('family_head_last_name')" class="mt-2" />
         </div>
 
         <!-- family_head_first_name -->
         <div class="mt-4">
-            <x-input-label for="family_head_first_name" value="代表者 名" />
+            <div class="flex items-center">
+                <x-input-label for="family_head_first_name" value="代表者 名" />
+                <span class="text-red-500 text-sm ml-1">　　必須</span>
+            </div>
             <x-text-input id="family_head_first_name" class="block mt-1 w-full" type="text" name="family_head_first_name" :value="old('family_head_first_name')" required />
             <x-input-error :messages="$errors->get('family_head_first_name')" class="mt-2" />
         </div>
 
         <!-- family_head_last_name_kana -->
         <div class="mt-4">
-            <x-input-label for="family_head_last_name_kana" value="代表者 せい" />
+            <div class="flex items-center">
+                <x-input-label for="family_head_last_name_kana" value="代表者 せい" />
+                <span class="text-red-500 text-sm ml-1">　　必須</span>
+            </div>
             <x-text-input id="family_head_last_name_kana" class="block mt-1 w-full" type="text" name="family_head_last_name_kana" :value="old('family_head_last_name_kana')" required />
             <x-input-error :messages="$errors->get('family_head_last_name_kana')" class="mt-2" />
         </div>
 
         <!-- family_head_first_name_kana -->
         <div class="mt-4">
-            <x-input-label for="family_head_first_name_kana" value="代表者 めい" />
+            <div class="flex items-center">
+                <x-input-label for="family_head_first_name_kana" value="代表者 めい" />
+                <span class="text-red-500 text-sm ml-1">　　必須</span>
+            </div>
             <x-text-input id="family_head_first_name_kana" class="block mt-1 w-full" type="text" name="family_head_first_name_kana" :value="old('family_head_first_name_kana')" required />
             <x-input-error :messages="$errors->get('family_head_first_name_kana')" class="mt-2" />
+        </div>
+
+        <div class="mt-8">
+            <p class="text-sm ml-1">連絡が取れるようにするため、電話番号とメールアドレス、どちらかは<span class="text-red-500">必ず</span>ご登録をお願いいたします</p>
         </div>
 
         <!-- email -->
@@ -67,7 +82,7 @@
         </div>  
 
         <!-- postcode -->
-        <div class="mt-4">
+        <div class="mt-8">
             <x-input-label for="postcode" value="郵便番号" />
             <x-text-input id="postcode" class="block mt-1 w-full" type="tel" name="postcode" :value="old('postcode')" />
             <x-input-error :messages="$errors->get('postcode')" class="mt-2" />
