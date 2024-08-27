@@ -10,16 +10,6 @@
             </p>
         </header>
 
-        @if (session('status') === 'danka-updated')
-            <p
-                x-data="{ show: true }"
-                x-show="show"
-                x-transition
-                x-init="setTimeout(() => show = false, 2000)"
-                class="text-sm text-gray-600"
-            >更新しました</p>
-        @endif
-
         @if (session('status') === 'require-email-or-phone-number')
             <p
                 x-data="{ show: true }"
