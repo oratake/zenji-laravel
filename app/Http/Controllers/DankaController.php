@@ -95,7 +95,7 @@ class DankaController extends Controller
 
         $danka->fill($danka_info);
         $danka->save();
-        return Redirect::route('dankas.edit', ['id' => $danka_id])->with('status', 'danka-updated');
+        return Redirect::route('dankas.index')->with('status', 'danka-updated');
         
     }
 
