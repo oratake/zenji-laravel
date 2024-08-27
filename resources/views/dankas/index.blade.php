@@ -16,7 +16,7 @@
                         x-transition
                         x-init="setTimeout(() => show = false, 2000)"
                         class="text-sm text-gray-600"
-                    >更新しました</p>
+                    >{{ session('danka')->family_head_last_name }}{{ session('danka')->family_head_first_name}}さんの情報を更新しました</p>
                 @endif
                     <table border="1">
                         <tr>
