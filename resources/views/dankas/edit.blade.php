@@ -42,7 +42,7 @@
                 <x-input-label for="family_head_last_name" value="代表者 姓" />
                 <span class="text-red-500 text-sm ml-1">　　必須</span>
             </div>
-            <x-text-input id="family_head_last_name" class="block mt-1 w-full" type="text" name="family_head_last_name" :value="old('family_head_last_name')" required autofocus />
+            <x-text-input id="family_head_last_name" class="block mt-1 w-full" type="text" name="family_head_last_name" :value="old('family_head_last_name', $danka->family_head_last_name)" required autofocus />
             <x-input-error :messages="$errors->get('family_head_last_name')" class="mt-2" />
         </div>
 
@@ -52,7 +52,7 @@
                 <x-input-label for="family_head_first_name" value="代表者 名" />
                 <span class="text-red-500 text-sm ml-1">　　必須</span>
             </div>
-            <x-text-input id="family_head_first_name" class="block mt-1 w-full" type="text" name="family_head_first_name" :value="old('family_head_first_name')" required />
+            <x-text-input id="family_head_first_name" class="block mt-1 w-full" type="text" name="family_head_first_name" :value="old('family_head_first_name', $danka->family_head_first_name)" required />
             <x-input-error :messages="$errors->get('family_head_first_name')" class="mt-2" />
         </div>
 
@@ -62,7 +62,7 @@
                 <x-input-label for="family_head_last_name_kana" value="代表者 せい" />
                 <span class="text-red-500 text-sm ml-1">　　必須</span>
             </div>
-            <x-text-input id="family_head_last_name_kana" class="block mt-1 w-full" type="text" name="family_head_last_name_kana" :value="old('family_head_last_name_kana')" required />
+            <x-text-input id="family_head_last_name_kana" class="block mt-1 w-full" type="text" name="family_head_last_name_kana" :value="old('family_head_last_name_kana', $danka->family_head_last_name_kana)" required />
             <x-input-error :messages="$errors->get('family_head_last_name_kana')" class="mt-2" />
         </div>
 
@@ -72,7 +72,7 @@
                 <x-input-label for="family_head_first_name_kana" value="代表者 めい" />
                 <span class="text-red-500 text-sm ml-1">　　必須</span>
             </div>
-            <x-text-input id="family_head_first_name_kana" class="block mt-1 w-full" type="text" name="family_head_first_name_kana" :value="old('family_head_first_name_kana')" required />
+            <x-text-input id="family_head_first_name_kana" class="block mt-1 w-full" type="text" name="family_head_first_name_kana" :value="old('family_head_first_name_kana', $danka->family_head_first_name_kana)" required />
             <x-input-error :messages="$errors->get('family_head_first_name_kana')" class="mt-2" />
         </div>
 
@@ -83,7 +83,7 @@
         <!-- email -->
         <div class="mt-4">
             <x-input-label for="email" value="連絡用メールアドレス" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"/>
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $danka->email)"/>
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>        
 
@@ -102,7 +102,7 @@
         <!-- phone_number -->
         <div class="mt-4">
             <x-input-label for="phone_number" value="電話番号 (市外局番からお入れください)" />
-            <x-text-input id="phone_number" class="block mt-1 w-full" type="tel" name="phone_number" :value="old('phone_number')" />
+            <x-text-input id="phone_number" class="block mt-1 w-full" type="tel" name="phone_number" :value="old('phone_number', $danka->phone_number)" />
             <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
         </div>  
 
