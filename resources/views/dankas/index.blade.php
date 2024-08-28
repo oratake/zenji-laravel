@@ -9,6 +9,15 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                @if (session('status') === 'danka-updated')
+                    <p
+                        x-data="{ show: true }"
+                        x-show="show"
+                        x-transition
+                        x-init="setTimeout(() => show = false, 2000)"
+                        class="text-sm text-gray-600"
+                    >{{ session('danka')->family_head_last_name }}{{ session('danka')->family_head_first_name}}さんの情報を更新しました</p>
+                @endif
                     <table border="1">
                         <tr>
                             <th>氏名</th>
