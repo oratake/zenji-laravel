@@ -22,6 +22,7 @@ class DankaFactory extends Factory
     public function definition(): array
     {
         $jp_faker = FakerFactory::create("ja_JP");
+        $address = $jp_faker->prefecture() . $jp_faker->city() . $jp_faker->streetAddress() . $jp_faker->secondaryAddress();
         return [
             //　'カラム名' => '設定したい値',
             'family_head_last_name' => $jp_faker->lastName(),
@@ -30,9 +31,9 @@ class DankaFactory extends Factory
             'family_head_first_name_kana' => $jp_faker->firstKanaName(),
             'email' => $jp_faker->unique()->safeEmail(),
             'postcode' => $jp_faker->postcode(),
-            'address' => $jp_faker->address(),
-            'phone_number' => $jp_faker->phoneNumber(),
-            'note' => $jp_faker->realText(),
+            'address' => $address,
+            'phone_number' => preg_replace('/[-]/', '', $jp_faker->phoneNumber()),
+            'note' => $jp_faker->realText(50),
             'bouzu_id' => 1
         ];
     }
