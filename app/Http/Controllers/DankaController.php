@@ -18,7 +18,7 @@ class DankaController extends Controller
     public function index()
     {
         $bouzu_id = Auth::id();
-        $dankas = Danka::where('bouzu_id', $bouzu_id)->get()->sortByDesc('created_at');
+        $dankas = Danka::where('bouzu_id', $bouzu_id)->orderBy('created_at', 'desc')->paginate(10);
 
         return view('dankas.index', ['dankas' => $dankas]);
     }
@@ -38,7 +38,7 @@ class DankaController extends Controller
             'family_head_first_name' => ['required', 'string', 'max:255'],
             'family_head_last_name_kana' => ['required', 'string', 'max:255'],
             'family_head_first_name_kana' => ['required', 'string', 'max:255'],
-            'email' => ['nullable', 'confirmed', 'string', 'lowercase', 'email', 'max:255', 'unique:'.Danka::class],
+            'email' => ['nullable', 'confirmed', 'string', 'lowercase', 'email', 'max:255', 'unique:' . Danka::class],
             'postcode' => ['nullable', 'string', 'max:255'],
             'address' => ['nullable', 'string', 'max:255'],
             'phone_number' => ['nullable', 'string', 'max:255'],
@@ -74,7 +74,7 @@ class DankaController extends Controller
         if (!Danka::isLoginBouzu($bouzu_id)) {
             return Redirect::route('welcome')->with('status', 'error-unauthorized');
         }
-            return view('dankas.edit', ['danka' => $danka]);
+        return view('dankas.edit', ['danka' => $danka]);
     }
 
     public function update(DankaUpdateRequest $request): RedirectResponse
@@ -96,9 +96,9 @@ class DankaController extends Controller
         $danka->fill($danka_info);
         $danka->save();
         return Redirect::route('dankas.index')->with([
-        'status' => 'danka-updated',
-        'danka' => $danka ]);
-        
+            'status' => 'danka-updated',
+            'danka' => $danka
+        ]);
     }
 
     public function destroy(Request $request): RedirectResponse
