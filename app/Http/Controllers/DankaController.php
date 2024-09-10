@@ -15,12 +15,23 @@ use Illuminate\View\View;
 class DankaController extends Controller
 {
     //檀家一覧
-    public function index()
+    public function index(Request $request)
     {
-        $bouzu_id = Auth::id();
-        $dankas = Danka::where('bouzu_id', $bouzu_id)->orderBy('created_at', 'desc')->paginate(10);
+        $pag_list = [
+            0 => 10,
+            1 => 25,
+            2 => 50,
+            3 => 100,
+        ];
+        $disp_list = $request->disp_list;
+        if (empty($disp_list)) {
+            $disp_list = 0;
+        }
 
-        return view('dankas.index', ['dankas' => $dankas]);
+        $bouzu_id = Auth::id();
+        $dankas = Danka::where('bouzu_id', $bouzu_id)->orderBy('created_at', 'desc')->paginate($disp_list);
+
+        return view('dankas.index', ['pag_list' => $pag_list, 'disp_list' => $disp_list, 'dankas' => $dankas]);
     }
 
     //檀家登録画面の表示

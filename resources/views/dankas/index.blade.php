@@ -9,6 +9,18 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    <form action="{{ route('dankas.index') }}" method="get" class="mb-4">
+                        <select name="disp_list" id="disp_list" value="{{ old('disp_list') }}" onchange="submit();">
+                            @foreach($pag_list as $key => $val)
+                            @if ($val === $disp_list)
+                            <option value="{{ $val }}" selected>{{ $val }}</option>
+                            @else
+                            <option value="{{ $val }}">{{ $val }}</option>
+                            @endif
+                            @endforeach
+                        </select>
+                        件ずつ表示
+                    </form>
                     @if (session('status') === 'danka-updated')
                     <p
                         x-data="{ show: true }"
