@@ -10,9 +10,9 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <form action="{{ route('dankas.index') }}" method="get" class="mb-4">
-                        <select name="disp_list" id="disp_list" value="{{ old('disp_list') }}" onchange="submit();">
+                        <select name="disp_list" id="disp_list" value="" onchange="submit();">
                             @foreach($pag_list as $key => $val)
-                            @if ($val === $disp_list)
+                            @if ( request('disp_list') == $val)
                             <option value="{{ $val }}" selected>{{ $val }}</option>
                             @else
                             <option value="{{ $val }}">{{ $val }}</option>
@@ -20,6 +20,11 @@
                             @endforeach
                         </select>
                         件ずつ表示
+                        <select name="sort_list" id="sort_list" value="" onchange="submit();">
+                            <option value="newest" @if( request('sort_list')==='newest' ) selected @endif>登録の新しい順</option>
+                            <option value="oldest" @if( request('sort_list')==='oldest' ) selected @endif>登録の古い順</option>
+                            <option value="syllabary" @if( request('sort_list')==='syllabary' ) selected @endif>五十音順</option>
+                        </select>
                     </form>
                     @if (session('status') === 'danka-updated')
                     <p

@@ -25,11 +25,34 @@ class DankaController extends Controller
         ];
         $disp_list = $request->disp_list;
         if (empty($disp_list)) {
-            $disp_list = 0;
+            $disp_list = 10;
+        }
+
+        $sort_list = $request->sort_list;
+        switch ($sort_list) {
+            case 'newest':
+                $sort = 'id';
+                $order = 'desc';
+                break;
+            case 'oldest':
+                $sort = 'id';
+                $order = 'asc';
+                break;
+            case 'syllabary':
+                $sort = 'family_head_last_name_kana';
+                $order = 'asc';
+                break;
+            default:
+                $sort = 'created_at';
+                $order = 'desc';
+                break;
         }
 
         $bouzu_id = Auth::id();
-        $dankas = Danka::where('bouzu_id', $bouzu_id)->orderBy('created_at', 'desc')->paginate($disp_list);
+        $dankas = Danka::where('bouzu_id', $bouzu_id)
+            ->orderBy($sort, $order)
+            ->orderBy('family_head_first_name_kana', 'asc')
+            ->paginate($disp_list);
 
         return view('dankas.index', ['pag_list' => $pag_list, 'disp_list' => $disp_list, 'dankas' => $dankas]);
     }
