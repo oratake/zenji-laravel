@@ -31,11 +31,11 @@ class DankaController extends Controller
         $sort_list = $request->sort_list;
         switch ($sort_list) {
             case 'newest':
-                $sort = 'id';
+                $sort = 'created_at';
                 $order = 'desc';
                 break;
             case 'oldest':
-                $sort = 'id';
+                $sort = 'created_at';
                 $order = 'asc';
                 break;
             case 'syllabary':
@@ -49,10 +49,14 @@ class DankaController extends Controller
         }
 
         $bouzu_id = Auth::id();
+
         $dankas = Danka::where('bouzu_id', $bouzu_id)
-            ->orderBy($sort, $order)
-            ->orderBy('family_head_first_name_kana', 'asc')
-            ->paginate($disp_list);
+            ->orderBy($sort, $order);
+        if ($sort_list === 'syllabary') {
+            $dankas = $dankas->orderBy('family_head_first_name_kana', 'asc');
+        }
+        $dankas = $dankas->paginate($disp_list);
+
 
         return view('dankas.index', ['pag_list' => $pag_list, 'disp_list' => $disp_list, 'dankas' => $dankas]);
     }
