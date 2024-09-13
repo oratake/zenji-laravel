@@ -29,7 +29,7 @@
                 <span class="font-medium">{{ $paginator->total() }}</span>
                 件中
                 <span class="font-medium">{{ $paginator->firstItem() }}</span>
-                件〜
+                〜
                 <span class="font-medium">{{ $paginator->lastItem() }}</span>
                 @else
                 {{ $paginator->count() }}
