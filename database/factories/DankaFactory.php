@@ -21,19 +21,18 @@ class DankaFactory extends Factory
 
     public function definition(): array
     {
-        $jp_faker = FakerFactory::create("ja_JP");
-        $address = $jp_faker->prefecture() . $jp_faker->city() . $jp_faker->streetAddress() . $jp_faker->secondaryAddress();
+        $address = fake()->prefecture() . fake()->city() . fake()->streetAddress() . fake()->secondaryAddress();
         return [
             //　'カラム名' => '設定したい値',
-            'family_head_last_name' => $jp_faker->lastName(),
-            'family_head_first_name' => $jp_faker->firstName(),
-            'family_head_last_name_kana' => $jp_faker->lastKanaName(),
-            'family_head_first_name_kana' => $jp_faker->firstKanaName(),
-            'email' => $jp_faker->unique()->safeEmail(),
-            'postcode' => $jp_faker->postcode(),
+            'family_head_last_name' => fake()->lastName(),
+            'family_head_first_name' => fake()->firstName(),
+            'family_head_last_name_kana' => fake()->lastKanaName(),
+            'family_head_first_name_kana' => fake()->firstKanaName(),
+            'email' => fake()->unique()->safeEmail(),
+            'postcode' => fake()->postcode(),
             'address' => $address,
-            'phone_number' => preg_replace('/[-]/', '', $jp_faker->phoneNumber()),
-            'note' => $jp_faker->realText(50),
+            'phone_number' => preg_replace('/[-]/', '', fake()->phoneNumber()),
+            'note' => fake()->realText(50),
             'bouzu_id' => 1
         ];
     }
