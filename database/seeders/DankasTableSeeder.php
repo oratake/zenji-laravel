@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Danka;
+use Carbon\Carbon;
 
 class DankasTableSeeder extends Seeder
 {
@@ -13,6 +14,11 @@ class DankasTableSeeder extends Seeder
      */
     public function run(): void
     {
-        Danka::factory()->count(100)->create();
+        $now = Carbon::now();
+        Danka::factory()->count(100)->create()
+            ->each(function ($danka, $index) use ($now) {
+                $danka->created_at = $now->addSeconds($index);
+                $danka->save();
+            });
     }
 }
