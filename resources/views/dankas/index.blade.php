@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900">
                     <form action="{{ route('dankas.index') }}" method="get" class="mb-4">
                         <select name="disp_list" id="disp_list" value="" onchange="submit();">
-                            @foreach($pag_list as $key => $val)
+                            @foreach($ITEMS_PER_PAGE_OPTIONS as $key => $val)
                             @if ( request('disp_list') == $val)
                             <option value="{{ $val }}" selected>{{ $val }}</option>
                             @else

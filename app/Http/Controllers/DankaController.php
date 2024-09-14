@@ -14,18 +14,19 @@ use Illuminate\View\View;
 
 class DankaController extends Controller
 {
+    private const ITEMS_PER_PAGE_OPTIONS = [
+        0 => 10,
+        1 => 25,
+        2 => 50,
+        3 => 100,
+    ];
+
     //檀家一覧
     public function index(Request $request)
     {
-        $pag_list = [
-            0 => 10,
-            1 => 25,
-            2 => 50,
-            3 => 100,
-        ];
         $disp_list = $request->disp_list;
         if (empty($disp_list)) {
-            $disp_list = 10;
+            $disp_list = self::ITEMS_PER_PAGE_OPTIONS[0];
         }
 
         $sort_list = $request->sort_list;
@@ -58,7 +59,14 @@ class DankaController extends Controller
         $dankas = $dankas->paginate($disp_list);
 
 
-        return view('dankas.index', ['pag_list' => $pag_list, 'disp_list' => $disp_list, 'dankas' => $dankas]);
+        return view(
+            'dankas.index',
+            [
+                'ITEMS_PER_PAGE_OPTIONS' => self::ITEMS_PER_PAGE_OPTIONS,
+                'disp_list' => $disp_list,
+                'dankas' => $dankas
+            ]
+        );
     }
 
     //檀家登録画面の表示
