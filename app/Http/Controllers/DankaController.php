@@ -24,8 +24,9 @@ class DankaController extends Controller
     //檀家一覧
     public function index(Request $request)
     {
-        $disp_list = $request->disp_list;
-        if (empty($disp_list)) {
+        if ($request->filled('disp_list')) {
+            $disp_list = $request->disp_list;
+        } else {
             $disp_list = self::ITEMS_PER_PAGE_OPTIONS[0];
         }
 
