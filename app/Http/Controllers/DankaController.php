@@ -62,7 +62,7 @@ class DankaController extends Controller
         return view(
             'dankas.index',
             [
-                'ITEMS_PER_PAGE_OPTIONS' => self::ITEMS_PER_PAGE_OPTIONS,
+                'items_per_page_options' => self::ITEMS_PER_PAGE_OPTIONS,
                 'disp_list' => $disp_list,
                 'dankas' => $dankas
             ]
