@@ -98,7 +98,7 @@ class DankaController extends Controller
 
         $bouzu_id = Auth::id();
 
-        $danka = Danka::create([
+        Danka::create([
             'family_head_last_name' => $request->family_head_last_name,
             'family_head_first_name' => $request->family_head_first_name,
             'family_head_last_name_kana' => $request->family_head_last_name_kana,
