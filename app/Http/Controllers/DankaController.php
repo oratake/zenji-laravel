@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules;
+
+use Illuminate\Validation\Rule;
+
 use Illuminate\View\View;
 
 class DankaController extends Controller
@@ -24,11 +27,11 @@ class DankaController extends Controller
     //檀家一覧
     public function index(Request $request)
     {
-        if ($request->filled('disp_list')) {
-            $disp_list = $request->disp_list;
-        } else {
-            $disp_list = self::ITEMS_PER_PAGE_OPTIONS[0];
-        }
+
+        $validate = $request->validate([
+            'disp_list' => Rule::in(self::ITEMS_PER_PAGE_OPTIONS)
+        ]);
+        $disp_list = intval($validate['disp_list']);
 
         $sort_list = $request->sort_list;
         switch ($sort_list) {
